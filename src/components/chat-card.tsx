@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 import Link from 'next/link';
 
+import { deleteChat } from '~/lib/actions';
 import { catchError, formatDate } from '~/lib/utils';
 import {
   AlertDialog,
@@ -86,9 +87,9 @@ export function ChatCard({ chat }: Props) {
                 isLoading={isPending}
                 onClick={() => {
                   try {
-                    // await for 2 seconds
                     startTransition(async () => {
-                      await new Promise(resolve => setTimeout(resolve, 2000));
+                      console.log('deleting chat');
+                      await deleteChat(chat.id);
                       setOpen(false);
                     });
                   } catch (e) {

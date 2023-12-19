@@ -1,12 +1,13 @@
 'use server';
 
-import { mkdir, writeFile } from 'fs/promises';
+import { mkdir, rm, writeFile } from 'fs/promises';
 import { revalidatePath } from 'next/cache';
 import { db } from '~/db';
+import { eq } from 'drizzle-orm';
 
 import { chatFiles, chats } from '~/db/schema';
 import { pdfLoader } from '~/lib/document-loaders';
-import { indexDocument } from '~/lib/vector-store';
+import { deleteCollection, indexDocument } from '~/lib/vector-store';
 
 export async function createChat(formData: FormData) {
   const name = formData.get('name') as string;
@@ -30,5 +31,12 @@ export async function createChat(formData: FormData) {
     return indexDocument({ docs, collectionName: chat.id });
   });
   await Promise.all(indexDocumentsPromises);
+  revalidatePath('/');
+}
+
+export async function deleteChat(id: string) {
+  await db.delete(chats).where(eq(chats.id, id));
+  await rm(`public/${id}`, { recursive: true });
+  await deleteCollection({ collectionName: id });
   revalidatePath('/');
 }
