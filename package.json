@@ -14,7 +14,9 @@
     "check": "pnpm lint && pnpm format:check",
     "db:generate": "dotenv drizzle-kit generate:sqlite",
     "db:push": "dotenv drizzle-kit push:sqlite",
-    "db:studio": "dotenv drizzle-kit studio"
+    "db:studio": "dotenv drizzle-kit studio",
+    "chroma:up": "cd chroma && docker compose up -d && cd ..",
+    "chroma:down": "cd chroma && docker compose down && cd .."
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.5",

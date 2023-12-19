@@ -19,7 +19,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={cn('flex min-h-screen flex-col font-sans antialiased', fontSans.variable)}>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
           {children}
           <Toaster />
         </ThemeProvider>
