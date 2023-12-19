@@ -60,7 +60,7 @@ export function ChatCard({ chat }: Props) {
       </CardContent>
       <CardFooter>
         <Link
-          href={`/chats/${chat.id}`}
+          href={`/${chat.id}`}
           className={buttonVariants({
             size: 'sm',
           })}
