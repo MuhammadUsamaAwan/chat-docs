@@ -28,20 +28,17 @@ export async function deleteDocument({ filePath, collectionName }: { filePath: s
   const vectorStore = await Chroma.fromExistingCollection(embeddings, {
     collectionName,
   });
-  console.log(filePath);
-  const docs = await vectorStore.similaritySearch('fashion brand', 1);
-  console.log(
-    JSON.stringify(
-      docs.map(doc => doc.metadata),
-      null,
-      2
-    )
-  );
-  console.log('before', await vectorStore.collection?.count());
   await vectorStore.delete({
     filter: {
       source: filePath,
     },
   });
-  console.log('after', await vectorStore.collection?.count());
+}
+
+export async function similaritySearch({ text, collectionName }: { text: string; collectionName: string }) {
+  const vectorStore = await Chroma.fromExistingCollection(embeddings, {
+    collectionName,
+  });
+  const docs = await vectorStore.similaritySearch(text, 1);
+  return docs.map(doc => doc.pageContent).join('\n');
 }

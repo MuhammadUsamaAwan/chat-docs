@@ -96,14 +96,14 @@ export function ChatSidebar({ chatId, chatFiles }: Props) {
                     variant='destructive'
                     isLoading={isPending}
                     onClick={() => {
-                      try {
-                        startTransition(async () => {
+                      startTransition(async () => {
+                        try {
                           await deleteChatFile(file.id, chatId);
                           setOpen(false);
-                        });
-                      } catch (e) {
-                        catchError(e);
-                      }
+                        } catch (e) {
+                          catchError(e);
+                        }
+                      });
                     }}
                   >
                     Yes

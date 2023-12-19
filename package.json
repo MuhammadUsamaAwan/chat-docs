@@ -16,7 +16,8 @@
     "db:push": "dotenv drizzle-kit push:sqlite",
     "db:studio": "dotenv drizzle-kit studio",
     "chroma:up": "cd chroma && docker compose up -d && cd ..",
-    "chroma:down": "cd chroma && docker compose down && cd .."
+    "chroma:down": "cd chroma && docker compose down && cd ..",
+    "chroma:reset": "pnpm chroma:down && pnpm chroma:up"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.5",
