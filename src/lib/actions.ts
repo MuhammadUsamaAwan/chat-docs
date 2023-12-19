@@ -23,9 +23,10 @@ export async function createChat(formData: FormData) {
   const chatFilesPromises = files.map(file => {
     return db.insert(chatFiles).values({ chatId: chat.id, name: file.name, path: `${basePath}/${file.name}` });
   });
+  await Promise.all([...saveFilesPromises, ...chatFilesPromises]);
   const indexDocumentsPromises = files.map(async file => {
     const docs = await pdfLoader(`${basePath}/${file.name}`);
     return indexDocument({ docs, collectionName: chat.id });
   });
-  await Promise.all([...saveFilesPromises, ...chatFilesPromises, ...indexDocumentsPromises]);
+  await Promise.all(indexDocumentsPromises);
 }
