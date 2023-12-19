@@ -28,14 +28,14 @@ export function CreateChat() {
         </DialogHeader>
         <form
           action={formData => {
-            try {
-              startTransition(async () => {
+            startTransition(async () => {
+              try {
                 await createChat(formData);
                 setOpen(false);
-              });
-            } catch (error) {
-              catchError(error);
-            }
+              } catch (error) {
+                catchError(error);
+              }
+            });
           }}
           className='space-y-4'
         >

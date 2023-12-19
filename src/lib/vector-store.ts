@@ -23,3 +23,38 @@ export async function deleteCollection({ collectionName }: { collectionName: str
     name: collectionName,
   });
 }
+
+export async function addDocument({
+  docs,
+  collectionName,
+}: {
+  docs: Document<Record<string, unknown>>[];
+  collectionName: string;
+}) {
+  const vectorStore = await Chroma.fromExistingCollection(embeddings, {
+    collectionName,
+  });
+  await vectorStore.addDocuments(docs);
+}
+
+export async function deleteDocument({ filePath, collectionName }: { filePath: string; collectionName: string }) {
+  const vectorStore = await Chroma.fromExistingCollection(embeddings, {
+    collectionName,
+  });
+  console.log(filePath);
+  const docs = await vectorStore.similaritySearch('fashion brand', 1);
+  console.log(
+    JSON.stringify(
+      docs.map(doc => doc.metadata),
+      null,
+      2
+    )
+  );
+  console.log('before', await vectorStore.collection?.count());
+  await vectorStore.delete({
+    filter: {
+      source: filePath,
+    },
+  });
+  console.log('after', await vectorStore.collection?.count());
+}

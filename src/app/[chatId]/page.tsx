@@ -18,7 +18,7 @@ export default async function ChatPage({ params: { chatId } }: Props) {
 
   return (
     <div>
-      <ChatSidebar chatFiles={chat.chatFiles} />
+      <ChatSidebar chatId={chatId} chatFiles={chat.chatFiles} />
     </div>
   );
 }

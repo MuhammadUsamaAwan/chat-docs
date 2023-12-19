@@ -75,7 +75,7 @@ export function ChatCard({ chat }: Props) {
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
               <AlertDialogDescription>
                 This action cannot be undone. This will permanently delete your chat data.
               </AlertDialogDescription>
@@ -86,15 +86,14 @@ export function ChatCard({ chat }: Props) {
                 variant='destructive'
                 isLoading={isPending}
                 onClick={() => {
-                  try {
-                    startTransition(async () => {
-                      console.log('deleting chat');
+                  startTransition(async () => {
+                    try {
                       await deleteChat(chat.id);
                       setOpen(false);
-                    });
-                  } catch (e) {
-                    catchError(e);
-                  }
+                    } catch (e) {
+                      catchError(e);
+                    }
+                  });
                 }}
               >
                 Yes
