@@ -1,6 +1,7 @@
 'use server';
 
 import { mkdir, writeFile } from 'fs/promises';
+import { revalidatePath } from 'next/cache';
 import { db } from '~/db';
 
 import { chatFiles, chats } from '~/db/schema';
@@ -29,4 +30,5 @@ export async function createChat(formData: FormData) {
     return indexDocument({ docs, collectionName: chat.id });
   });
   await Promise.all(indexDocumentsPromises);
+  revalidatePath('/');
 }

@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 
 import { createChat } from '~/lib/actions';
+import { catchError } from '~/lib/utils';
 import { Button } from '~/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
 import { Input } from '~/components/ui/input';
@@ -11,13 +12,13 @@ import { Label } from '~/components/ui/label';
 import { LoadingButton } from './loading-button';
 
 export function CreateChat() {
-  const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   return (
-    <Dialog open={showModal} onOpenChange={setShowModal}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size='sm' onClick={() => setShowModal(true)}>
+        <Button size='sm' onClick={() => setOpen(true)}>
           New Chat
         </Button>
       </DialogTrigger>
@@ -27,10 +28,14 @@ export function CreateChat() {
         </DialogHeader>
         <form
           action={formData => {
-            startTransition(async () => {
-              await createChat(formData);
-              setShowModal(false);
-            });
+            try {
+              startTransition(async () => {
+                await createChat(formData);
+                setOpen(false);
+              });
+            } catch (error) {
+              catchError(error);
+            }
           }}
           className='space-y-4'
         >

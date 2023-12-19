@@ -6,9 +6,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function catchError(e: unknown) {
-  if (e instanceof Error) {
-    return toast.error(e.message);
+export function catchError(error: unknown) {
+  if (error instanceof Error) {
+    return toast.error(error.message);
   } else {
     return toast.error('Something went wrong, please try again later.');
   }
