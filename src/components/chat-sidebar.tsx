@@ -24,7 +24,7 @@ type Props = {
 
 export function ChatSidebar({ chat, chatFiles }: Props) {
   return (
-    <aside className='h-screen w-64 space-y-2 border-r p-2 py-4'>
+    <>
       <Link href='/' className='flex items-center space-x-2 rounded-lg p-2 hover:bg-muted'>
         <Icons.logo className='h-5 w-5' />
         <span className='font-semibold'>Chat Docs</span>
@@ -36,6 +36,6 @@ export function ChatSidebar({ chat, chatFiles }: Props) {
         ))}
       </ScrollArea>
       <ChatSettings chat={chat} />
-    </aside>
+    </>
   );
 }

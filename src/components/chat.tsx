@@ -43,8 +43,8 @@ export function Chat({ chat, initialMessages }: Props) {
   }, [messages]);
 
   return (
-    <main className='flex h-screen flex-1 flex-col py-4 pr-4'>
-      <div ref={messagesRef} className='mb-4 flex-1 space-y-8 overflow-y-scroll px-4'>
+    <main className='flex h-screen flex-1 flex-col p-4'>
+      <div ref={messagesRef} className='mb-4 flex-1 space-y-8 overflow-y-scroll pr-4'>
         {messages.map(message => (
           <ChatMessage key={message.id} message={message} />
         ))}

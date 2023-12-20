@@ -13,6 +13,7 @@ import {
   Laptop,
   Loader2,
   LogOut,
+  Menu,
   Moon,
   Paperclip,
   Search,
@@ -50,4 +51,5 @@ export const Icons = {
   bot: Bot,
   settings: Settings,
   stop: StopCircle,
+  menu: Menu,
 };
