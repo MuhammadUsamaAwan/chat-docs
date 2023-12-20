@@ -21,10 +21,6 @@ export async function POST(reques: Request) {
     const chat_history = chatHistory.map(m => `${m.role === 'system' ? 'Assistant' : 'User'}: ${m.content}`).join('\n');
     const question = messages.at(-1)?.content ?? '';
     const context = await similaritySearch({ text: question, collectionName: chatId });
-    console.log('CONTEXT');
-    console.log(context);
-    console.log('CHAT HISTORY');
-    console.log(chat_history);
 
     const template = `
       You are a helpful assistant. Your job is to answer the question based only on the following context and chat history. Prioritize the context over the chat history.

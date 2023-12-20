@@ -16,6 +16,7 @@ import {
   Moon,
   Paperclip,
   Search,
+  Settings,
   SunMedium,
   Trash2,
   Upload,
@@ -46,4 +47,5 @@ export const Icons = {
   send: ArrowUp,
   user: User,
   bot: Bot,
+  settings: Settings,
 };
