@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { getChat } from '~/lib/fetchers';
+import { Chat } from '~/components/chat';
 import { ChatSidebar } from '~/components/chat-sidebar';
 
 type Props = {
@@ -17,8 +18,9 @@ export default async function ChatPage({ params: { chatId } }: Props) {
   }
 
   return (
-    <div>
+    <div className='flex space-x-4'>
       <ChatSidebar chatId={chatId} chatFiles={chat.chatFiles} />
+      <Chat />
     </div>
   );
 }

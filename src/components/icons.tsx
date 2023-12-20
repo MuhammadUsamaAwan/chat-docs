@@ -1,4 +1,5 @@
 import {
+  ArrowUp,
   BookText,
   Check,
   ChevronDown,
@@ -14,7 +15,6 @@ import {
   Moon,
   Paperclip,
   Search,
-  Send,
   SunMedium,
   Trash2,
   Upload,
@@ -42,6 +42,6 @@ export const Icons = {
   upload: Upload,
   paperClip: Paperclip,
   trash: Trash2,
-  send: Send,
+  send: ArrowUp,
   user: User,
 };
