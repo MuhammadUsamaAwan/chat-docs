@@ -34,7 +34,7 @@ export function ChatFile({ chatId, file }: Props) {
     <div key={file.id} className='flex items-center justify-between space-x-2 rounded-lg p-2 hover:bg-muted'>
       <Link href={`/${file.path}`.replace('public/', '')} target='_blank' className='flex items-center space-x-2'>
         <Icons.paperClip className='h-4 w-4' />
-        <span>{truncate(file.name, 18)}</span>
+        <span>{truncate(file.name, 15)}</span>
       </Link>
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger asChild>

@@ -36,7 +36,7 @@ export async function createChat(formData: FormData) {
   });
   await Promise.all(indexDocumentsPromises);
   revalidatePath('/');
-  revalidatePath(`/chats/${chat.id}`);
+  revalidatePath(`/${chat.id}`);
 }
 
 export async function deleteChat(id: string) {
@@ -65,7 +65,7 @@ export async function addChatFile(formData: FormData) {
   const docs = await loadDocument(filePath);
   await indexDocument({ docs, collectionName: chatId });
   revalidatePath('/');
-  revalidatePath(`/chats/${chatId}`);
+  revalidatePath(`/${chatId}`);
 }
 
 export async function deleteChatFile(id: string, chatId: string) {
@@ -92,5 +92,5 @@ export async function updateChat(formData: FormData) {
   const k = parseInt(formData.get('k') as string);
   await db.update(chats).set({ name, model, baseUrl, save, k }).where(eq(chats.id, id));
   revalidatePath('/');
-  revalidatePath(`/chats/${id}`);
+  revalidatePath(`/${id}`);
 }
