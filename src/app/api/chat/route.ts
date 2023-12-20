@@ -8,9 +8,13 @@ import { chatMessages } from '~/db/schema';
 import { chatModel } from '~/lib/chat-model';
 import { similaritySearch } from '~/lib/vector-store';
 
-export async function POST(reques: Request) {
+const formatMessage = (message: Message) => {
+  return `${message.role}: ${message.content}`;
+};
+
+export async function POST(request: Request) {
   try {
-    const { messages, chatId, saveMessages, k } = (await reques.json()) as {
+    const { messages, chatId, saveMessages, k } = (await request.json()) as {
       messages: Message[];
       chatId: string;
       saveMessages?: boolean;
@@ -23,7 +27,13 @@ export async function POST(reques: Request) {
         role: true,
       },
     });
-    const chat_history = chatHistory.map(m => `${m.role === 'system' ? 'Assistant' : 'User'}: ${m.content}`).join('\n');
+    let chat_history = chatHistory
+      .map(message => `${message.role === 'system' ? 'Assistant' : 'User'}: ${message.content}`)
+      .join('\n');
+    if (!saveMessages) {
+      const previousMessages = messages.slice(0, -1).map(formatMessage).join('\n');
+      chat_history = `${chat_history}\n${previousMessages}`;
+    }
     const question = messages.at(-1)?.content ?? '';
     const context = await similaritySearch({ text: question, collectionName: chatId, k });
 
