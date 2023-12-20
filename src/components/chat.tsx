@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useChat, type Message } from 'ai/react';
 import TextareaAutosize from 'react-autosize-textarea';
 
 import { addChatMessage } from '~/lib/actions';
+import { useIsScrolledToBottom } from '~/hooks/useIsScrolledToBottom';
 import { Button } from '~/components/ui/button';
 import { ChatMessage } from '~/components/chat-message';
 import { Icons } from '~/components/icons';
@@ -20,18 +21,34 @@ type Props = {
 };
 
 export function Chat({ chat, initialMessages }: Props) {
+  const messagesRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, stop } = useChat({
     body: { chatId: chat.id, saveMessages: chat.save, k: chat.k },
     initialMessages,
   });
+  const isAtBottom = useIsScrolledToBottom(messagesRef);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (messagesEndRef.current && isAtBottom) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
 
   return (
     <main className='flex h-screen flex-1 flex-col py-4 pr-4'>
-      <div className='flex-1 space-y-8 overflow-y-scroll'>
+      <div ref={messagesRef} className='mb-4 flex-1 space-y-8 overflow-y-scroll px-4'>
         {messages.map(message => (
           <ChatMessage key={message.id} message={message} />
         ))}
+        <div ref={messagesEndRef}></div>
       </div>
       <form
         onSubmit={e => {
@@ -57,9 +74,15 @@ export function Chat({ chat, initialMessages }: Props) {
             }
           }}
         />
-        <Button size='xs' className='absolute bottom-[15px] right-4' disabled={isLoading}>
-          {isLoading ? <Icons.spinner className='h-5 w-5 animate-spin' /> : <Icons.send className='h-5 w-5' />}
-        </Button>
+        {!isLoading ? (
+          <Button size='xs' className='absolute bottom-[15px] right-4'>
+            <Icons.send className='h-5 w-5' />
+          </Button>
+        ) : (
+          <Button size='xs' className='absolute bottom-[15px] right-4' type='button' onClick={stop}>
+            <Icons.stop className='h-5 w-5' />
+          </Button>
+        )}
       </form>
     </main>
   );

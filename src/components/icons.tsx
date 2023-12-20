@@ -17,6 +17,7 @@ import {
   Paperclip,
   Search,
   Settings,
+  StopCircle,
   SunMedium,
   Trash2,
   Upload,
@@ -48,4 +49,5 @@ export const Icons = {
   user: User,
   bot: Bot,
   settings: Settings,
+  stop: StopCircle,
 };
