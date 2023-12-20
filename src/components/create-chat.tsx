@@ -51,6 +51,20 @@ export function CreateChat() {
             <Input id='chat-name' name='name' placeholder='Chat Name' required />
           </div>
           <div className='space-y-1'>
+            <Label htmlFor='model'>Model Name</Label>
+            <Input id='model' name='model' defaultValue='llama2' placeholder='Model Name' required />
+          </div>
+          <div className='space-y-1'>
+            <Label htmlFor='model-base-url'>Model Base Url</Label>
+            <Input
+              id='model-base-url'
+              name='baseUrl'
+              defaultValue='http://localhost:11434'
+              placeholder='Model Base Url'
+              required
+            />
+          </div>
+          <div className='space-y-1'>
             <Label htmlFor='chat-files'>Files</Label>
             <Input id='chat-files' name='files' type='file' multiple required />
           </div>

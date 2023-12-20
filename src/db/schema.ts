@@ -8,6 +8,8 @@ export const chats = sqliteTable('chats', {
   name: text('name').notNull(),
   save: integer('save', { mode: 'boolean' }).notNull().default(true),
   k: integer('k').notNull().default(1),
+  model: text('model').notNull().default('llama2'),
+  baseUrl: text('baseUrl').notNull().default('http://localhost:11434'),
   createdAt: integer('createdAt', { mode: 'timestamp' })
     .notNull()
     .$defaultFn(() => new Date()),

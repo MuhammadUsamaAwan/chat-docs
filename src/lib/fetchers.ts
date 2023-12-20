@@ -28,6 +28,8 @@ export async function getChat(id: string) {
     columns: {
       id: true,
       name: true,
+      model: true,
+      baseUrl: true,
       save: true,
       k: true,
     },

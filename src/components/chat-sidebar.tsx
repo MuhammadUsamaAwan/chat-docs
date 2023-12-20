@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import type { Chat } from '~/types';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { AddChatFile } from '~/components/add-chat-file';
@@ -9,12 +10,7 @@ import { ChatSettings } from '~/components/chat-settings';
 import { Icons } from '~/components/icons';
 
 type Props = {
-  chat: {
-    id: string;
-    name: string;
-    save: boolean;
-    k: number;
-  };
+  chat: Chat;
   chatFiles: {
     id: string;
     name: string;

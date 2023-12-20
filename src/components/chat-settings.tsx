@@ -1,4 +1,5 @@
 import { useState, useTransition } from 'react';
+import type { Chat } from '~/types';
 import { useTheme } from 'next-themes';
 
 import { updateChat } from '~/lib/actions';
@@ -11,12 +12,7 @@ import { Icons } from '~/components/icons';
 import { LoadingButton } from '~/components/loading-button';
 
 type Props = {
-  chat: {
-    id: string;
-    name: string;
-    save: boolean;
-    k: number;
-  };
+  chat: Chat;
 };
 
 export function ChatSettings({ chat }: Props) {
@@ -66,6 +62,20 @@ export function ChatSettings({ chat }: Props) {
           <div className='space-y-1'>
             <Label htmlFor='chat-name'>Chat Name</Label>
             <Input name='name' id='chat-name' defaultValue={chat.name} />
+          </div>
+          <div className='space-y-1'>
+            <Label htmlFor='model'>Model Name</Label>
+            <Input id='model' name='model' defaultValue={chat.model} placeholder='Model Name' required />
+          </div>
+          <div className='space-y-1'>
+            <Label htmlFor='model-base-url'>Model Base Url</Label>
+            <Input
+              id='model-base-url'
+              name='baseUrl'
+              defaultValue={chat.baseUrl}
+              placeholder='Model Base Url'
+              required
+            />
           </div>
           <div className='space-y-1'>
             <Label>Save Messages</Label>

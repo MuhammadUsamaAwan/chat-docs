@@ -15,6 +15,13 @@
       "when": 1703058679635,
       "tag": "0001_cloudy_invisible_woman",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1703086039831,
+      "tag": "0002_oval_energizer",
+      "breakpoints": true
     }
   ]
 }

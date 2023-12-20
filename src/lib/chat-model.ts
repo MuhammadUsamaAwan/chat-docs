@@ -1,6 +1,8 @@
 import { ChatOllama } from 'langchain/chat_models/ollama';
 
-export const chatModel = new ChatOllama({
-  baseUrl: 'http://localhost:11434',
-  model: 'llama2',
-});
+export function getChatModel({ model, baseUrl }: { model: string; baseUrl: string }) {
+  return new ChatOllama({
+    model,
+    baseUrl,
+  });
+}
