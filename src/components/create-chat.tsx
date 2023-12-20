@@ -68,7 +68,7 @@ export function CreateChat() {
           </div>
           <div className='space-y-1'>
             <Label>No of Pages for Context</Label>
-            <Select name='k' defaultValue='one'>
+            <Select name='k' defaultValue='1'>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>

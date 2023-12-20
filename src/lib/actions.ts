@@ -6,7 +6,7 @@ import { db } from '~/db';
 import { and, eq } from 'drizzle-orm';
 
 import { chatFiles, chatMessages, chats } from '~/db/schema';
-import { pdfLoader } from '~/lib/document-loaders';
+import { loadDocument } from '~/lib/document-loader';
 import { deleteCollection, deleteDocument, indexDocument } from '~/lib/vector-store';
 
 export async function createChat(formData: FormData) {
@@ -29,7 +29,7 @@ export async function createChat(formData: FormData) {
   });
   await Promise.all([...saveFilesPromises, ...chatFilesPromises]);
   const indexDocumentsPromises = files.map(async file => {
-    const docs = await pdfLoader(`${basePath}/${file.name}`);
+    const docs = await loadDocument(`${basePath}/${file.name}`);
     return indexDocument({ docs, collectionName: chat.id });
   });
   await Promise.all(indexDocumentsPromises);
@@ -60,7 +60,7 @@ export async function addChatFile(formData: FormData) {
     writeFile(filePath, Buffer.from(fileBuffer)),
     db.insert(chatFiles).values({ chatId, name: file.name, path: filePath }),
   ]);
-  const docs = await pdfLoader(filePath);
+  const docs = await loadDocument(filePath);
   await indexDocument({ docs, collectionName: chatId });
   revalidatePath('/');
   revalidatePath(`/chats/${chatId}`);
