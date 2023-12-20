@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { db } from '~/db';
 import { and, eq } from 'drizzle-orm';
 
-import { chatFiles, chats } from '~/db/schema';
+import { chatFiles, chatMessages, chats } from '~/db/schema';
 import { pdfLoader } from '~/lib/document-loaders';
 import { deleteCollection, deleteDocument, indexDocument } from '~/lib/vector-store';
 
@@ -71,6 +71,10 @@ export async function deleteChatFile(id: string, chatId: string) {
   }
   const filePath = `public/${chatId}/${chatFile.name}`;
   await Promise.all([unlink(filePath), deleteDocument({ filePath, collectionName: chatId })]);
-  revalidatePath('/dashboard');
+  revalidatePath('/');
   revalidatePath(`/chats/${chatId}`);
+}
+
+export async function addChatMessage({ chatId, content }: { chatId: string; content: string }) {
+  await db.insert(chatMessages).values({ chatId, content, role: 'user' });
 }

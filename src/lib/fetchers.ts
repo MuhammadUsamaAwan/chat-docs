@@ -1,7 +1,7 @@
 import { db } from '~/db';
 import { eq } from 'drizzle-orm';
 
-import { chats } from '~/db/schema';
+import { chatMessages, chats } from '~/db/schema';
 
 export async function getChats() {
   return db.query.chats.findMany({
@@ -42,6 +42,18 @@ export async function getChat(id: string) {
           createdAt: true,
         },
       },
+    },
+  });
+}
+
+export async function getChatMessages(chatId: string) {
+  return db.query.chatMessages.findMany({
+    where: eq(chatMessages.chatId, chatId),
+    columns: {
+      id: true,
+      role: true,
+      content: true,
+      createdAt: true,
     },
   });
 }

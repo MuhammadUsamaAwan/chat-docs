@@ -1,21 +1,24 @@
 'use client';
 
 import { useRef } from 'react';
-import { useChat } from 'ai/react';
+import { useChat, type Message } from 'ai/react';
 import TextareaAutosize from 'react-autosize-textarea';
 
+import { addChatMessage } from '~/lib/actions';
 import { Button } from '~/components/ui/button';
 import { ChatMessage } from '~/components/chat-message';
 import { Icons } from '~/components/icons';
 
 type Props = {
   chatId: string;
+  initialMessages?: Message[];
 };
 
-export function Chat({ chatId }: Props) {
+export function Chat({ chatId, initialMessages }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
     body: { chatId },
+    initialMessages,
   });
 
   return (
@@ -25,7 +28,15 @@ export function Chat({ chatId }: Props) {
           <ChatMessage key={message.id} message={message} />
         ))}
       </div>
-      <form onSubmit={handleSubmit} ref={formRef} className='relative'>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          void addChatMessage({ chatId, content: input });
+          handleSubmit(e);
+        }}
+        ref={formRef}
+        className='relative'
+      >
         <TextareaAutosize
           value={input}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleInputChange(e)}

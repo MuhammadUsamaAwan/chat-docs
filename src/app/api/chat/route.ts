@@ -1,25 +1,33 @@
-import { StreamingTextResponse, type Message as VercelChatMessage } from 'ai';
+import { db } from '~/db';
+import { StreamingTextResponse, type Message } from 'ai';
+import { eq } from 'drizzle-orm';
 import { PromptTemplate } from 'langchain/prompts';
 import { BytesOutputParser } from 'langchain/schema/output_parser';
 
+import { chatMessages } from '~/db/schema';
 import { chatModel } from '~/lib/chat-model';
 import { similaritySearch } from '~/lib/vector-store';
 
-const formatMessage = (message: VercelChatMessage) => {
-  return `${message.role}: ${message.content}`;
-};
-
 export async function POST(reques: Request) {
   try {
-    const { messages, chatId } = (await reques.json()) as { messages: VercelChatMessage[]; chatId: string };
-    const chat_history = messages.slice(0, -1).map(formatMessage).join('\n');
+    const { messages, chatId } = (await reques.json()) as { messages: Message[]; chatId: string };
+    const chatHistory = await db.query.chatMessages.findMany({
+      where: eq(chatMessages.chatId, chatId),
+      columns: {
+        content: true,
+        role: true,
+      },
+    });
+    const chat_history = chatHistory.map(m => `${m.role === 'system' ? 'Assistant' : 'User'}: ${m.content}`).join('\n');
     const question = messages.at(-1)?.content ?? '';
     const context = await similaritySearch({ text: question, collectionName: chatId });
+    console.log('CONTEXT');
     console.log(context);
+    console.log('CHAT HISTORY');
     console.log(chat_history);
 
     const template = `
-      Answer the question based only on the following context and chat history, prioritize the context over the chat history.
+      You are a helpful assistant. Your job is to answer the question based only on the following context and chat history. Prioritize the context over the chat history.
       <context>
         {context}
       </context>
@@ -33,7 +41,20 @@ export async function POST(reques: Request) {
 
     const prompt = PromptTemplate.fromTemplate(template);
     const outputParser = new BytesOutputParser();
-    const chain = prompt.pipe(chatModel).pipe(outputParser);
+    const chain = prompt
+      .pipe(chatModel)
+      .pipe(outputParser)
+      .withListeners({
+        async onEnd(run) {
+          // eslint-disable-next-line
+          const answer = run.child_runs.at(-1)!.inputs.lc_kwargs?.content as string;
+          await db.insert(chatMessages).values({
+            chatId,
+            content: answer,
+            role: 'system',
+          });
+        },
+      });
     const stream = await chain.stream({
       chat_history,
       context,
