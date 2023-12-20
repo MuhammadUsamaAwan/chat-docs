@@ -25,7 +25,12 @@ export async function getChats() {
 export async function getChat(id: string) {
   return db.query.chats.findFirst({
     where: eq(chats.id, id),
-    columns: {},
+    columns: {
+      id: true,
+      name: true,
+      save: true,
+      k: true,
+    },
     with: {
       chatFiles: {
         columns: {

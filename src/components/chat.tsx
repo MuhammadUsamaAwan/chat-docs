@@ -10,14 +10,19 @@ import { ChatMessage } from '~/components/chat-message';
 import { Icons } from '~/components/icons';
 
 type Props = {
-  chatId: string;
+  chat: {
+    id: string;
+    name: string;
+    save: boolean;
+    k: number;
+  };
   initialMessages?: Message[];
 };
 
-export function Chat({ chatId, initialMessages }: Props) {
+export function Chat({ chat, initialMessages }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    body: { chatId },
+    body: { chatId: chat.id },
     initialMessages,
   });
 
@@ -31,7 +36,7 @@ export function Chat({ chatId, initialMessages }: Props) {
       <form
         onSubmit={e => {
           e.preventDefault();
-          void addChatMessage({ chatId, content: input });
+          void addChatMessage({ chatId: chat.id, content: input });
           handleSubmit(e);
         }}
         ref={formRef}

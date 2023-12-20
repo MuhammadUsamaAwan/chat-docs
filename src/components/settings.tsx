@@ -1,18 +1,31 @@
+import { useState, useTransition } from 'react';
 import { useTheme } from 'next-themes';
 
-import { useLocalStorage } from '~/hooks/useLocalStorage';
+import { updateChat } from '~/lib/actions';
+import { catchError } from '~/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
+import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
 import { Icons } from '~/components/icons';
+import { LoadingButton } from '~/components/loading-button';
 
-export function Settings() {
+type Props = {
+  chat: {
+    id: string;
+    name: string;
+    save: boolean;
+    k: number;
+  };
+};
+
+export function Settings({ chat }: Props) {
   const { theme, setTheme } = useTheme();
-  const [saveChat, setSaveChat] = useLocalStorage('saveChat', 'yes');
-  const [contextPages, setContextPages] = useLocalStorage('contextPages', '1');
+  const [open, setOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <button className='flex w-full items-center space-x-2 rounded-lg p-2 hover:bg-muted'>
           <Icons.settings className='h-5 w-5' />
@@ -23,7 +36,20 @@ export function Settings() {
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
         </DialogHeader>
-        <div className='space-y-4'>
+        <form
+          className='space-y-4'
+          action={formData => {
+            startTransition(async () => {
+              try {
+                formData.append('id', chat.id);
+                await updateChat(formData);
+                setOpen(false);
+              } catch (error) {
+                catchError(error);
+              }
+            });
+          }}
+        >
           <div className='space-y-1'>
             <Label>Theme</Label>
             <Select value={theme} onValueChange={val => setTheme(val)}>
@@ -38,8 +64,12 @@ export function Settings() {
             </Select>
           </div>
           <div className='space-y-1'>
-            <Label>Save Chats</Label>
-            <Select value={saveChat} onValueChange={val => setSaveChat(val)}>
+            <Label htmlFor='chat-name'>Chat Name</Label>
+            <Input name='name' id='chat-name' defaultValue={chat.name} />
+          </div>
+          <div className='space-y-1'>
+            <Label>Save Messages</Label>
+            <Select name='save' defaultValue={chat.save ? 'yes' : 'no'}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -51,7 +81,7 @@ export function Settings() {
           </div>
           <div className='space-y-1'>
             <Label>No of Pages for Context</Label>
-            <Select value={contextPages} onValueChange={val => setContextPages(val)}>
+            <Select name='k' defaultValue={String(chat.k)}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -64,7 +94,10 @@ export function Settings() {
               </SelectContent>
             </Select>
           </div>
-        </div>
+          <LoadingButton type='submit' className='w-full' isLoading={isPending}>
+            Create Chat
+          </LoadingButton>
+        </form>
       </DialogContent>
     </Dialog>
   );

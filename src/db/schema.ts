@@ -6,6 +6,8 @@ export const chats = sqliteTable('chats', {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   name: text('name').notNull(),
+  save: integer('save', { mode: 'boolean' }).notNull().default(true),
+  k: integer('k').notNull().default(1),
   createdAt: integer('createdAt', { mode: 'timestamp' })
     .notNull()
     .$defaultFn(() => new Date()),

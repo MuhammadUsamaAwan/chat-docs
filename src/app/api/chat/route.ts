@@ -10,7 +10,12 @@ import { similaritySearch } from '~/lib/vector-store';
 
 export async function POST(reques: Request) {
   try {
-    const { messages, chatId } = (await reques.json()) as { messages: Message[]; chatId: string };
+    const { messages, chatId, saveChat, k } = (await reques.json()) as {
+      messages: Message[];
+      chatId: string;
+      saveChat?: boolean;
+      k?: number;
+    };
     const chatHistory = await db.query.chatMessages.findMany({
       where: eq(chatMessages.chatId, chatId),
       columns: {
@@ -20,7 +25,7 @@ export async function POST(reques: Request) {
     });
     const chat_history = chatHistory.map(m => `${m.role === 'system' ? 'Assistant' : 'User'}: ${m.content}`).join('\n');
     const question = messages.at(-1)?.content ?? '';
-    const context = await similaritySearch({ text: question, collectionName: chatId });
+    const context = await similaritySearch({ text: question, collectionName: chatId, k });
 
     const template = `
       You are a helpful assistant. Your job is to answer the question based only on the following context and chat history. Prioritize the context over the chat history.
@@ -42,13 +47,15 @@ export async function POST(reques: Request) {
       .pipe(outputParser)
       .withListeners({
         async onEnd(run) {
-          // eslint-disable-next-line
-          const answer = run.child_runs.at(-1)!.inputs.lc_kwargs?.content as string;
-          await db.insert(chatMessages).values({
-            chatId,
-            content: answer,
-            role: 'system',
-          });
+          if (saveChat) {
+            // eslint-disable-next-line
+            const answer = run.child_runs.at(-1)!.inputs.lc_kwargs?.content as string;
+            await db.insert(chatMessages).values({
+              chatId,
+              content: answer,
+              role: 'system',
+            });
+          }
         },
       });
     const stream = await chain.stream({
