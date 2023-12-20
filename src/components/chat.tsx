@@ -24,7 +24,7 @@ export function Chat({ chat, initialMessages }: Props) {
   const messagesRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const { messages, input, handleInputChange, handleSubmit, isLoading, stop } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
     body: { chatId: chat.id, saveMessages: chat.save, k: chat.k },
     initialMessages,
   });
@@ -74,15 +74,9 @@ export function Chat({ chat, initialMessages }: Props) {
             }
           }}
         />
-        {!isLoading ? (
-          <Button size='xs' className='absolute bottom-[15px] right-4'>
-            <Icons.send className='h-5 w-5' />
-          </Button>
-        ) : (
-          <Button size='xs' className='absolute bottom-[15px] right-4' type='button' onClick={stop}>
-            <Icons.stop className='h-5 w-5' />
-          </Button>
-        )}
+        <Button size='xs' className='absolute bottom-[15px] right-4' disabled={isLoading}>
+          {isLoading ? <Icons.spinner className='h-5 w-5 animate-spin' /> : <Icons.send className='h-5 w-5' />}
+        </Button>
       </form>
     </main>
   );
