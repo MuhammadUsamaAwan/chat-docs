@@ -39,11 +39,11 @@ export function CreateChat() {
           }}
           className='space-y-4'
         >
-          <div className='space-y-2'>
+          <div className='space-y-1'>
             <Label htmlFor='chat-name'>Name</Label>
             <Input id='chat-name' name='name' placeholder='Chat Name' required />
           </div>
-          <div className='space-y-2'>
+          <div className='space-y-1'>
             <Label htmlFor='chat-files'>Files</Label>
             <Input id='chat-files' name='files' type='file' multiple required />
           </div>
