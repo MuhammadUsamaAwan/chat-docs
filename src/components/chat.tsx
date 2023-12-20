@@ -22,7 +22,7 @@ type Props = {
 export function Chat({ chat, initialMessages }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    body: { chatId: chat.id },
+    body: { chatId: chat.id, saveMessages: chat.save, k: chat.k },
     initialMessages,
   });
 
@@ -36,7 +36,9 @@ export function Chat({ chat, initialMessages }: Props) {
       <form
         onSubmit={e => {
           e.preventDefault();
-          void addChatMessage({ chatId: chat.id, content: input });
+          if (chat.save) {
+            void addChatMessage({ chatId: chat.id, content: input });
+          }
           handleSubmit(e);
         }}
         ref={formRef}

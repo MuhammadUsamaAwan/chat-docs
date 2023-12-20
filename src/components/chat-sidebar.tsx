@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { AddChatFile } from '~/components/add-chat-file';
 import { ChatFile } from '~/components/chat-file';
+import { ChatSettings } from '~/components/chat-settings';
 import { Icons } from '~/components/icons';
-import { Settings } from '~/components/settings';
 
 type Props = {
   chat: {
@@ -35,7 +35,7 @@ export function ChatSidebar({ chat, chatFiles }: Props) {
           <ChatFile key={file.id} file={file} chatId={chat.id} />
         ))}
       </ScrollArea>
-      <Settings chat={chat} />
+      <ChatSettings chat={chat} />
     </aside>
   );
 }

@@ -19,7 +19,7 @@ type Props = {
   };
 };
 
-export function Settings({ chat }: Props) {
+export function ChatSettings({ chat }: Props) {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -29,7 +29,7 @@ export function Settings({ chat }: Props) {
       <DialogTrigger asChild>
         <button className='flex w-full items-center space-x-2 rounded-lg p-2 hover:bg-muted'>
           <Icons.settings className='h-5 w-5' />
-          <span>Settings</span>
+          <span>Chat Settings</span>
         </button>
       </DialogTrigger>
       <DialogContent>
@@ -95,7 +95,7 @@ export function Settings({ chat }: Props) {
             </Select>
           </div>
           <LoadingButton type='submit' className='w-full' isLoading={isPending}>
-            Create Chat
+            Save Changes
           </LoadingButton>
         </form>
       </DialogContent>

@@ -10,10 +10,10 @@ import { similaritySearch } from '~/lib/vector-store';
 
 export async function POST(reques: Request) {
   try {
-    const { messages, chatId, saveChat, k } = (await reques.json()) as {
+    const { messages, chatId, saveMessages, k } = (await reques.json()) as {
       messages: Message[];
       chatId: string;
-      saveChat?: boolean;
+      saveMessages?: boolean;
       k?: number;
     };
     const chatHistory = await db.query.chatMessages.findMany({
@@ -47,7 +47,7 @@ export async function POST(reques: Request) {
       .pipe(outputParser)
       .withListeners({
         async onEnd(run) {
-          if (saveChat) {
+          if (saveMessages) {
             // eslint-disable-next-line
             const answer = run.child_runs.at(-1)!.inputs.lc_kwargs?.content as string;
             await db.insert(chatMessages).values({
