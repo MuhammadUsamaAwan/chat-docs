@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       .pipe(outputParser)
       .withListeners({
         async onEnd(run) {
-          if (chat.id) {
+          if (chat.save) {
             // eslint-disable-next-line
             const answer = run.child_runs.at(-1)!.inputs.lc_kwargs?.content as string;
             await db.insert(chatMessages).values({
