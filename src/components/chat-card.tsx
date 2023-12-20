@@ -4,7 +4,8 @@ import { useState, useTransition } from 'react';
 import Link from 'next/link';
 
 import { deleteChat } from '~/lib/actions';
-import { catchError, formatDate } from '~/lib/utils';
+import { catchError } from '~/lib/utils';
+import { useRelativeTime } from '~/hooks/useRelativeTime';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -36,12 +37,13 @@ type Props = {
 export function ChatCard({ chat }: Props) {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const relativeTime = useRelativeTime(chat.createdAt);
 
   return (
     <Card key={chat.id}>
       <CardHeader className='pb-4'>
         <CardTitle>{chat.name}</CardTitle>
-        <CardDescription>{formatDate(chat.createdAt)}</CardDescription>
+        <CardDescription className='text-base'>{relativeTime} ago</CardDescription>
       </CardHeader>
       <CardContent className='pb-4'>
         <div>

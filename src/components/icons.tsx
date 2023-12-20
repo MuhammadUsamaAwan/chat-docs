@@ -1,6 +1,7 @@
 import {
   ArrowUp,
   BookText,
+  Bot,
   Check,
   ChevronDown,
   ChevronLeft,
@@ -44,4 +45,5 @@ export const Icons = {
   trash: Trash2,
   send: ArrowUp,
   user: User,
+  bot: Bot,
 };

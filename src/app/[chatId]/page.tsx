@@ -20,7 +20,7 @@ export default async function ChatPage({ params: { chatId } }: Props) {
   return (
     <div className='flex space-x-4'>
       <ChatSidebar chatId={chatId} chatFiles={chat.chatFiles} />
-      <Chat />
+      <Chat chatId={chatId} />
     </div>
   );
 }
