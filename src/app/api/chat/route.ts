@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache';
 import { db } from '~/db';
 import type { Chat, Settings } from '~/types';
 import { StreamingTextResponse, type Message } from 'ai';
@@ -71,6 +72,7 @@ export async function POST(request: Request) {
               content: answer,
               role: 'system',
             });
+            revalidatePath(`/${chat.id}`);
           }
         },
       });
