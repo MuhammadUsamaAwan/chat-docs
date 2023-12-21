@@ -40,16 +40,18 @@ export async function POST(request: Request) {
     console.log(context);
 
     const template = `
-      You are a helpful assistant. Your job is to answer the question based only on the following context and chat history. Prioritize the context over the chat history.
-      <context>
+        ---
+        You are a helpful assistant with the primary task of providing accurate responses based on the given context and chat history. Format your reply using markdown.
+
+        **Context:**
         {context}
-      </context>
 
-      <chat_history>
+        **Chat History:**
         {chat_history}
-      </chat_history>
 
-      Question: {question}
+        **Question:**
+        {question}
+        ---
     `;
 
     const prompt = PromptTemplate.fromTemplate(template);

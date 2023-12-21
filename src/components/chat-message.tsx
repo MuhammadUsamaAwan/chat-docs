@@ -1,8 +1,12 @@
 import { type Message } from 'ai';
+import rehypeHighlight from 'rehype-highlight';
 
 import { useRelativeTime } from '~/hooks/useRelativeTime';
 import { Avatar, AvatarFallback } from '~/components/ui/avatar';
 import { Icons } from '~/components/icons';
+import { MemoizedReactMarkdown } from '~/components/markdown';
+
+import 'highlight.js/styles/github-dark.css';
 
 type Props = {
   message: Message;
@@ -23,7 +27,17 @@ export function ChatMessage({ message }: Props) {
           {message.role === 'user' ? 'You' : 'Chat Docs AI'}{' '}
           <span className='text-sm font-normal text-muted-foreground'>({relativeTime} ago)</span>
         </div>
-        <div>{message.content}</div>
+        <MemoizedReactMarkdown
+          className='prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0'
+          rehypePlugins={[rehypeHighlight]}
+          components={{
+            p({ children }) {
+              return <p className='mb-2 last:mb-0'>{children}</p>;
+            },
+          }}
+        >
+          {message.content}
+        </MemoizedReactMarkdown>
       </div>
     </div>
   );
