@@ -4,9 +4,9 @@ import Link from 'next/link';
 import type { Chat } from '~/types';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
-import { AddChatFile } from '~/components/chat/add-chat-file';
-import { ChatFile } from '~/components/chat/chat-file';
-import { ChatSettings } from '~/components/chat/chat-settings';
+import { AddChatFile } from '~/components/add-chat-file';
+import { ChatFile } from '~/components/chat-file';
+import { ChatSettings } from '~/components/chat-settings';
 import { Icons } from '~/components/icons';
 
 type Props = {
