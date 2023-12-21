@@ -25,13 +25,13 @@ export default async function ChatPage({ params: { chatId } }: Props) {
     <div className='flex flex-col sm:flex-row'>
       <div className='sticky top-0 z-10 flex h-14 items-center justify-between border-b bg-background px-4 sm:hidden'>
         <Link href='/' className='flex items-center space-x-2'>
-          <Icons.logo className='h-5 w-5' />
+          <Icons.logo />
           <span className='font-semibold'>Chat Docs</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant='outline' size='xs'>
-              <Icons.menu className='h-5 w-5' />
+            <Button variant='ghost' size='icon'>
+              <Icons.menu />
             </Button>
           </SheetTrigger>
           <SheetContent side='left' className='space-y-2'>

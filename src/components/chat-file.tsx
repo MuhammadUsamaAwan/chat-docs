@@ -14,8 +14,7 @@ import {
   AlertDialogTrigger,
 } from '~/components/ui/alert-dialog';
 import { Icons } from '~/components/icons';
-
-import { LoadingButton } from './loading-button';
+import { LoadingButton } from '~/components/loading-button';
 
 type Props = {
   chatId: string;

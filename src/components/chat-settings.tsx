@@ -1,6 +1,5 @@
 import { useState, useTransition } from 'react';
 import type { Chat } from '~/types';
-import { useTheme } from 'next-themes';
 
 import { updateChat } from '~/lib/actions';
 import { catchError } from '~/lib/utils';
@@ -16,7 +15,6 @@ type Props = {
 };
 
 export function ChatSettings({ chat }: Props) {
-  const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -46,19 +44,6 @@ export function ChatSettings({ chat }: Props) {
             });
           }}
         >
-          <div className='space-y-1'>
-            <Label>Theme</Label>
-            <Select value={theme} onValueChange={val => setTheme(val)}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='light'>Light</SelectItem>
-                <SelectItem value='dark'>Dark</SelectItem>
-                <SelectItem value='system'>System</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
           <div className='space-y-1'>
             <Label htmlFor='chat-name'>Chat Name</Label>
             <Input name='name' id='chat-name' defaultValue={chat.name} />
