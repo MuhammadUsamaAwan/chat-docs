@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { getSettings } from '~/lib/fetchers';
 import { Icons } from '~/components/icons';
-import { Settings } from '~/components/settings';
-import { ToggleTheme } from '~/components/toggle-theme';
+import { Settings } from '~/components/layouts/settings';
+import { ToggleTheme } from '~/components/layouts/toggle-theme';
 
 export async function SiteHeader() {
   const settings = await getSettings();

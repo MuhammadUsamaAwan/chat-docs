@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 import { getChat, getChatMessages } from '~/lib/fetchers';
 import { Button } from '~/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '~/components/ui/sheet';
-import { Chat } from '~/components/chat';
-import { ChatSidebar } from '~/components/chat-sidebar';
+import { Chat } from '~/components/chat/chat';
 import { Icons } from '~/components/icons';
+import { ChatSidebar } from '~/components/layouts/chat-sidebar';
 
 type Props = {
   params: {

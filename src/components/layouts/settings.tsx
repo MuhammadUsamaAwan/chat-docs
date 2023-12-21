@@ -7,7 +7,7 @@ import { Button } from '~/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
 import { Icons } from '~/components/icons';
 
-import { SettingsForm } from './settings-form';
+import { SettingsForm } from '../forms/settings-form';
 
 type Props = {
   settings: Settings;

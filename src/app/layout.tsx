@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { fontSans } from '~/lib/fonts';
 import { cn } from '~/lib/utils';
 import { Toaster } from '~/components/ui/toaster';
-import { ThemeProvider } from '~/components/theme-provider';
+import { ThemeProvider } from '~/components/layouts/theme-provider';
 
 import '~/styles/globals.css';
 

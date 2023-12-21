@@ -8,7 +8,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import { addChatMessage } from '~/lib/actions';
 import { useIsScrolledToBottom } from '~/hooks/useIsScrolledToBottom';
 import { Button } from '~/components/ui/button';
-import { ChatMessage } from '~/components/chat-message';
+import { ChatMessage } from '~/components/chat/chat-message';
 import { Icons } from '~/components/icons';
 
 type Props = {

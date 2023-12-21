@@ -1,8 +1,8 @@
 import { getChats } from '~/lib/fetchers';
 import { Separator } from '~/components/ui/separator';
-import { ChatCard } from '~/components/chat-card';
-import { CreateChat } from '~/components/create-chat';
-import { SiteHeader } from '~/components/site-header';
+import { ChatCard } from '~/components/chat/chat-card';
+import { CreateChat } from '~/components/layouts/create-chat';
+import { SiteHeader } from '~/components/layouts/site-header';
 
 export default async function HomePage() {
   const chats = await getChats();
