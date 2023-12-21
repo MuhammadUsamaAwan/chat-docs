@@ -5,9 +5,8 @@ import type { Settings } from '~/types';
 
 import { Button } from '~/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
+import { SettingsForm } from '~/components/forms/settings-form';
 import { Icons } from '~/components/icons';
-
-import { SettingsForm } from '../forms/settings-form';
 
 type Props = {
   settings: Settings;

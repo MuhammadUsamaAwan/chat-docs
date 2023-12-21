@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import type { Chat } from '~/types';
+import type { Chat, Settings } from '~/types';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
@@ -9,9 +11,10 @@ import { Icons } from '~/components/icons';
 
 type Props = {
   chat: Chat;
+  settings: Settings;
 };
 
-export function ChatSettings({ chat }: Props) {
+export function ChatSettings({ chat, settings }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -38,10 +41,10 @@ export function ChatSettings({ chat }: Props) {
           <TabsContent value='chat-settings' className='pt-2'>
             <UpdateChatForm onSave={() => setOpen(false)} chat={chat} />
           </TabsContent>
-          <TabsContent value='global-settings'>Change your password here.</TabsContent>
+          <TabsContent value='global-settings'>
+            <SettingsForm onSave={() => setOpen(false)} initialValues={settings} />
+          </TabsContent>
         </Tabs>
-
-        {/* <SettingsForm onSave={() => setOpen(false)} chat={chat} /> */}
       </DialogContent>
     </Dialog>
   );

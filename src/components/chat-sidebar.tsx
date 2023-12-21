@@ -1,8 +1,7 @@
-'use client';
-
 import Link from 'next/link';
 import type { Chat } from '~/types';
 
+import { getSettings } from '~/lib/fetchers';
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { AddChatFile } from '~/components/add-chat-file';
 import { ChatFile } from '~/components/chat-file';
@@ -18,7 +17,9 @@ type Props = {
   }[];
 };
 
-export function ChatSidebar({ chat, chatFiles }: Props) {
+export async function ChatSidebar({ chat, chatFiles }: Props) {
+  const settings = await getSettings();
+
   return (
     <>
       <Link href='/' className='flex items-center space-x-2 rounded-lg p-2 hover:bg-muted'>
@@ -31,7 +32,7 @@ export function ChatSidebar({ chat, chatFiles }: Props) {
           <ChatFile key={file.id} file={file} chatId={chat.id} />
         ))}
       </ScrollArea>
-      <ChatSettings chat={chat} />
+      <ChatSettings chat={chat} settings={settings} />
     </>
   );
 }

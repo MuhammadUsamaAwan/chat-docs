@@ -1,3 +1,5 @@
+'use client';
+
 import { useTransition } from 'react';
 
 import { addChatFile } from '~/lib/actions';
