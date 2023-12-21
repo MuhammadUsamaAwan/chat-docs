@@ -42,8 +42,8 @@ dependencies:
     specifier: ^9.2.2
     version: 9.2.2
   chromadb:
-    specifier: ^1.7.2
-    version: 1.7.2
+    specifier: ^1.7.3
+    version: 1.7.3
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -51,7 +51,7 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   d3-dsv:
-    specifier: '2'
+    specifier: ^2.0.0
     version: 2.0.0
   dayjs:
     specifier: ^1.11.10
@@ -63,11 +63,11 @@ dependencies:
     specifier: ^11.9.0
     version: 11.9.0
   langchain:
-    specifier: ^0.0.209
-    version: 0.0.209(chromadb@1.7.2)(d3-dsv@2.0.0)(mammoth@1.6.0)(officeparser@4.0.5)(pdf-parse@1.1.1)
+    specifier: ^0.0.211
+    version: 0.0.211(chromadb@1.7.3)(d3-dsv@2.0.0)(mammoth@1.6.0)(officeparser@4.0.5)(pdf-parse@1.1.1)
   lucide-react:
-    specifier: ^0.298.0
-    version: 0.298.0(react@18.2.0)
+    specifier: ^0.299.0
+    version: 0.299.0(react@18.2.0)
   mammoth:
     specifier: ^1.6.0
     version: 1.6.0
@@ -109,7 +109,7 @@ dependencies:
     version: 2.1.0
   tailwindcss-animate:
     specifier: ^1.0.7
-    version: 1.0.7(tailwindcss@3.3.7)
+    version: 1.0.7(tailwindcss@3.4.0)
 
 devDependencies:
   '@ianvs/prettier-plugin-sort-imports':
@@ -117,15 +117,15 @@ devDependencies:
     version: 4.1.1(prettier@3.1.1)
   '@tailwindcss/typography':
     specifier: ^0.5.10
-    version: 0.5.10(tailwindcss@3.3.7)
+    version: 0.5.10(tailwindcss@3.4.0)
   '@types/better-sqlite3':
     specifier: ^7.6.8
     version: 7.6.8
   '@types/eslint':
-    specifier: ^8.44.9
-    version: 8.44.9
+    specifier: ^8.56.0
+    version: 8.56.0
   '@types/node':
-    specifier: ^20.10.4
+    specifier: ^20.10.5
     version: 20.10.5
   '@types/react':
     specifier: ^18.2.45
@@ -134,10 +134,10 @@ devDependencies:
     specifier: ^18.2.18
     version: 18.2.18
   '@typescript-eslint/eslint-plugin':
-    specifier: ^6.14.0
+    specifier: ^6.15.0
     version: 6.15.0(@typescript-eslint/parser@6.15.0)(eslint@8.56.0)(typescript@5.3.3)
   '@typescript-eslint/parser':
-    specifier: ^6.14.0
+    specifier: ^6.15.0
     version: 6.15.0(eslint@8.56.0)(typescript@5.3.3)
   autoprefixer:
     specifier: ^10.4.16
@@ -146,7 +146,7 @@ devDependencies:
     specifier: ^7.3.0
     version: 7.3.0
   drizzle-kit:
-    specifier: ^0.20.6
+    specifier: ^0.20.7
     version: 0.20.7
   eslint:
     specifier: ^8.56.0
@@ -159,7 +159,7 @@ devDependencies:
     version: 9.1.0(eslint@8.56.0)
   eslint-plugin-tailwindcss:
     specifier: ^3.13.0
-    version: 3.13.0(tailwindcss@3.3.7)
+    version: 3.13.0(tailwindcss@3.4.0)
   postcss:
     specifier: ^8.4.32
     version: 8.4.32
@@ -170,8 +170,8 @@ devDependencies:
     specifier: ^0.5.9
     version: 0.5.9(@ianvs/prettier-plugin-sort-imports@4.1.1)(prettier@3.1.1)
   tailwindcss:
-    specifier: ^3.3.6
-    version: 3.3.7
+    specifier: ^3.4.0
+    version: 3.4.0
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -1227,8 +1227,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@langchain/community@0.0.7(chromadb@1.7.2):
-    resolution: {integrity: sha512-4O41IF8Cirqbb/SC7xNecxUIjuHX7HZkOlEgj98Zex+UuBF4aggPawUAJnP7+ak30PfOxH7NymnIWcs4MqRfxg==}
+  /@langchain/community@0.0.9(chromadb@1.7.3):
+    resolution: {integrity: sha512-urMtgkxY/9SnuAWIqpHcZkHvtVEaR+1EysI6YVeJYDJJ32TO0jtTW5b+yp8+Ba85LnS1QRfQxqdXCwAOdJJpSQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@aws-crypto/sha256-js': ^5.0.0
@@ -1464,9 +1464,9 @@ packages:
       ws:
         optional: true
     dependencies:
-      '@langchain/core': 0.1.2
-      '@langchain/openai': 0.0.6
-      chromadb: 1.7.2
+      '@langchain/core': 0.1.4
+      '@langchain/openai': 0.0.7
+      chromadb: 1.7.3
       flat: 5.0.2
       langsmith: 0.0.52
       uuid: 9.0.1
@@ -1475,8 +1475,8 @@ packages:
       - encoding
     dev: false
 
-  /@langchain/core@0.1.2:
-    resolution: {integrity: sha512-BX9vBovUi+FQLsUy+kh32kGtNU3Iv5GIBDB63xfCvAPefrt/WnqdsqwYnaXMB2MohBcZavIVMewHymsgiEYNcQ==}
+  /@langchain/core@0.1.4:
+    resolution: {integrity: sha512-Y3/mQLEiQ78ZbsTGYvPRj5bpvrhpTAcsbdyEtlYEvjMLbehEADfjQ41G9zc7U/emkrGtHRmxWO1ISmoeXeDmyQ==}
     engines: {node: '>=18'}
     dependencies:
       ansi-styles: 5.2.0
@@ -1491,13 +1491,13 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /@langchain/openai@0.0.6:
-    resolution: {integrity: sha512-t4ZzBAPfBCHk56MyS/BlSzEHyXEJ6LLhw3QTjqt8+QKfl8U31pSKDOe3xuVveM2YqpaoVAqWY27DHUKNTZ0gNg==}
+  /@langchain/openai@0.0.7:
+    resolution: {integrity: sha512-m/UjOf9SdIZhoR3RALgUS78+v4r/RJQhyQbvGLbaCcAwbCFjUohmESW6Y1n5dIhwk5rVazprG2oL0O1ZSAwrgw==}
     engines: {node: '>=18'}
     dependencies:
-      '@langchain/core': 0.1.2
+      '@langchain/core': 0.1.4
       js-tiktoken: 1.0.8
-      openai: 4.23.0
+      openai: 4.24.0
       zod: 3.22.4
       zod-to-json-schema: 3.20.3(zod@3.22.4)
     transitivePeerDependencies:
@@ -2355,7 +2355,7 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@tailwindcss/typography@0.5.10(tailwindcss@3.3.7):
+  /@tailwindcss/typography@0.5.10(tailwindcss@3.4.0):
     resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -2364,7 +2364,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.3.7
+      tailwindcss: 3.4.0
     dev: true
 
   /@tokenizer/token@0.3.0:
@@ -2382,8 +2382,8 @@ packages:
       '@types/ms': 0.7.34
     dev: false
 
-  /@types/eslint@8.44.9:
-    resolution: {integrity: sha512-6yBxcvwnnYoYT1Uk2d+jvIfsuP4mb2EdIxFnrPABj5a/838qe5bGkNLFOiipX4ULQ7XVQvTxOh7jO+BTAiqsEw==}
+  /@types/eslint@8.56.0:
+    resolution: {integrity: sha512-FlsN0p4FhuYRjIxpbdXovvHQhtlG05O1GG/RNWvdAxTboR438IOTwmrY/vLA+Xfgg06BTkP045M3vpFwTMv1dg==}
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
@@ -3197,12 +3197,12 @@ packages:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
     dev: false
 
-  /chromadb@1.7.2:
-    resolution: {integrity: sha512-Zf+opwc4uHfDu2gfWx3Uk/yak7KXiS1ThA9SzdaREh9wh5EXytkAhuJ9EPY4vOcp5qNriZ6Ep5+rr4YPSrw6vA==}
+  /chromadb@1.7.3:
+    resolution: {integrity: sha512-3GgvQjpqgk5C89x5EuTDaXKbfrdqYDJ5UVyLQ3ZmwxnpetNc+HhRDGjkvXa5KSvpQ3lmKoyDoqnN4tZepfFkbw==}
     engines: {node: '>=14.17.0'}
     peerDependencies:
       '@google/generative-ai': ^0.1.1
-      cohere-ai: ^5.0.0 || ^6.0.0
+      cohere-ai: ^5.0.0 || ^6.0.0 || ^7.0.0
       openai: ^3.0.0 || ^4.0.0
     peerDependenciesMeta:
       '@google/generative-ai':
@@ -3622,7 +3622,7 @@ packages:
       json-diff: 0.9.0
       minimatch: 7.4.6
       semver: 7.5.4
-      wrangler: 3.21.0
+      wrangler: 3.22.1
       zod: 3.22.4
     transitivePeerDependencies:
       - bufferutil
@@ -4155,7 +4155,7 @@ packages:
       string.prototype.matchall: 4.0.10
     dev: true
 
-  /eslint-plugin-tailwindcss@3.13.0(tailwindcss@3.3.7):
+  /eslint-plugin-tailwindcss@3.13.0(tailwindcss@3.4.0):
     resolution: {integrity: sha512-Fcep4KDRLWaK3KmkQbdyKHG0P4GdXFmXdDaweTIPcgOP60OOuWFbh1++dufRT28Q4zpKTKaHwTsXPJ4O/EjU2Q==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
@@ -4163,7 +4163,7 @@ packages:
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.32
-      tailwindcss: 3.3.7
+      tailwindcss: 3.4.0
     dev: true
 
   /eslint-scope@7.2.2:
@@ -5153,8 +5153,8 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /langchain@0.0.209(chromadb@1.7.2)(d3-dsv@2.0.0)(mammoth@1.6.0)(officeparser@4.0.5)(pdf-parse@1.1.1):
-    resolution: {integrity: sha512-5+ixk2z6XP7NiPqAinrolwd4LKA4b+gWDiFHGaMnk3AHeOnquUHEEqDXghuQrMpr93p8egwO9AgmpKpAIvznFg==}
+  /langchain@0.0.211(chromadb@1.7.3)(d3-dsv@2.0.0)(mammoth@1.6.0)(officeparser@4.0.5)(pdf-parse@1.1.1):
+    resolution: {integrity: sha512-vSuFAcgnj5uwh3ARpX2JiaywQSpK4IdwbkJTYC1xS3Gd79iUYiF8pyC1iuh0lMLmsjIimOQBNXI2kwtwa9gy7g==}
     engines: {node: '>=18'}
     peerDependencies:
       '@aws-sdk/client-s3': ^3.310.0
@@ -5188,7 +5188,7 @@ packages:
       ignore: ^5.2.0
       ioredis: ^5.3.2
       jsdom: '*'
-      mammoth: '*'
+      mammoth: ^1.6.0
       mongodb: ^5.2.0
       node-llama-cpp: '*'
       notion-to-md: ^3.1.0
@@ -5313,11 +5313,11 @@ packages:
         optional: true
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.7(chromadb@1.7.2)
-      '@langchain/core': 0.1.2
-      '@langchain/openai': 0.0.6
+      '@langchain/community': 0.0.9(chromadb@1.7.3)
+      '@langchain/core': 0.1.4
+      '@langchain/openai': 0.0.7
       binary-extensions: 2.2.0
-      chromadb: 1.7.2
+      chromadb: 1.7.3
       d3-dsv: 2.0.0
       expr-eval: 2.0.2
       js-tiktoken: 1.0.8
@@ -5518,8 +5518,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucide-react@0.298.0(react@18.2.0):
-    resolution: {integrity: sha512-tWoxZ663Zf/n8VxXTHnTJsU/w1ysWT1LORnIL1pzqElFdSqBhWbZeJ3sLdCZ5FpzpbkpkYEtluhuTyG2BTDYNQ==}
+  /lucide-react@0.299.0(react@18.2.0):
+    resolution: {integrity: sha512-59MiDzDzFI/efHhb4n0vGdXelMNwou7JlAFvVS4boA1G/7aYU7garPciYo73CODzkhrhz0JOgdtSTPSe5dMrlQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -6212,8 +6212,8 @@ packages:
     dependencies:
       wrappy: 1.0.2
 
-  /openai@4.23.0:
-    resolution: {integrity: sha512-ey2CXh1OTcTUa0AWZWuTpgA9t5GuAG3DVU1MofCRUI7fQJij8XJ3Sr0VtgxoAE69C9wbHBMCux8Z/IQZfSwHiA==}
+  /openai@4.24.0:
+    resolution: {integrity: sha512-h8fsas4lu0ul18oDzFIZpEQryh2SJEUJWanyfEwjME/klcKWZM/blDz2cKiT+aFBqPJzcYdCUj/8E7n20f0jEw==}
     hasBin: true
     dependencies:
       '@types/node': 18.19.3
@@ -7334,16 +7334,16 @@ packages:
       '@babel/runtime': 7.23.6
     dev: false
 
-  /tailwindcss-animate@1.0.7(tailwindcss@3.3.7):
+  /tailwindcss-animate@1.0.7(tailwindcss@3.4.0):
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.3.7
+      tailwindcss: 3.4.0
     dev: false
 
-  /tailwindcss@3.3.7:
-    resolution: {integrity: sha512-pjgQxDZPvyS/nG3ZYkyCvsbONJl7GdOejfm24iMt2ElYQQw8Jc4p0m8RdMp7mznPD0kUhfzwV3zAwa80qI0zmQ==}
+  /tailwindcss@3.4.0:
+    resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -7852,8 +7852,8 @@ packages:
       '@cloudflare/workerd-windows-64': 1.20231030.0
     dev: true
 
-  /wrangler@3.21.0:
-    resolution: {integrity: sha512-DLoo4XfjeyuGRAVWZFHmU1jWnZIfyLGDm6Ika9oy/CLCPfJzVJvf2jI70EU5BlEHWDZXMSJKw7FDdgSqwhaQXg==}
+  /wrangler@3.22.1:
+    resolution: {integrity: sha512-fN7WOF6Ono/TV5V90PuJQNf0azS7B+5C/N/KRjqhlAIQBz+c0yLOGkF6kC/akxjr1yIAC9AzcPk9+OuTSq0C+g==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     dependencies:

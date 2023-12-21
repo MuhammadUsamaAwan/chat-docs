@@ -63,7 +63,7 @@ export async function getSettings() {
     'chat_model_base_url',
     'embedding_model_name',
     'embedding_model_base_url',
-    'chroma_url',
+    'vector_store_url',
   ];
   const _settings = await db.query.settings.findMany({
     where: inArray(settings.name, keys),
@@ -73,11 +73,11 @@ export async function getSettings() {
     },
   });
   return {
-    chat_model_name: _settings.find(e => e.name === 'chat_model_name')?.value ?? 'llama2',
+    chat_model_name: _settings.find(e => e.name === 'chat_model_name')?.value ?? 'mistral',
     chat_model_base_url: _settings.find(e => e.name === 'chat_model_base_url')?.value ?? 'http://localhost:11434',
-    embedding_model_name: _settings.find(e => e.name === 'embedding_model_name')?.value ?? 'llama2',
+    embedding_model_name: _settings.find(e => e.name === 'embedding_model_name')?.value ?? 'mistral',
     embedding_model_base_url:
       _settings.find(e => e.name === 'embedding_model_base_url')?.value ?? 'http://localhost:11434',
-    chroma_url: _settings.find(e => e.name === 'chroma_url')?.value ?? 'http://localhost:8000',
+    vector_store_url: _settings.find(e => e.name === 'vector_store_url')?.value ?? 'http://localhost:8000',
   };
 }

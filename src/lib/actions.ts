@@ -96,7 +96,7 @@ export async function updateSettings(formData: FormData) {
   const chat_model_base_url = formData.get('chat_model_base_url') as string;
   const embedding_model_name = formData.get('embedding_model_name') as string;
   const embedding_model_base_url = formData.get('embedding_model_base_url') as string;
-  const chroma_url = formData.get('chroma_url') as string;
+  const vector_store_url = formData.get('vector_store_url') as string;
 
   await Promise.all([
     db
@@ -117,8 +117,8 @@ export async function updateSettings(formData: FormData) {
       .onConflictDoUpdate({ target: settings.name, set: { value: embedding_model_base_url } }),
     db
       .insert(settings)
-      .values({ name: 'chroma_url', value: chroma_url })
-      .onConflictDoUpdate({ target: settings.name, set: { value: chroma_url } }),
+      .values({ name: 'vector_store_url', value: vector_store_url })
+      .onConflictDoUpdate({ target: settings.name, set: { value: vector_store_url } }),
   ]);
   revalidatePath('/');
   revalidatePath('/chat/[chatId]', 'page');

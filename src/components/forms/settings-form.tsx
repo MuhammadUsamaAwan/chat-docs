@@ -16,7 +16,13 @@ type Props = {
 
 export function SettingsForm({
   onSave,
-  initialValues: { chat_model_name, chat_model_base_url, embedding_model_name, embedding_model_base_url, chroma_url },
+  initialValues: {
+    chat_model_name,
+    chat_model_base_url,
+    embedding_model_name,
+    embedding_model_base_url,
+    vector_store_url,
+  },
 }: Props) {
   const [isPending, startTransition] = useTransition();
 
@@ -77,8 +83,14 @@ export function SettingsForm({
         />
       </div>
       <div className='space-y-1'>
-        <Label htmlFor='chroma_url'>Chroma Url</Label>
-        <Input id='chroma_url' name='chroma_url' placeholder='Chroma Url' defaultValue={chroma_url} required />
+        <Label htmlFor='vector_store_url'>Vector Store Url</Label>
+        <Input
+          id='vector_store_url'
+          name='vector_store_url'
+          placeholder='Vector Store Url'
+          defaultValue={vector_store_url}
+          required
+        />
       </div>
       <LoadingButton type='submit' className='w-full' isLoading={isPending}>
         Save Changes

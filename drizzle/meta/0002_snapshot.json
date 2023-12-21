@@ -49,12 +49,8 @@
           "name": "chatFiles_chatId_chats_id_fk",
           "tableFrom": "chatFiles",
           "tableTo": "chats",
-          "columnsFrom": [
-            "chatId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["chatId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -107,12 +103,8 @@
           "name": "chatMessages_chatId_chats_id_fk",
           "tableFrom": "chatMessages",
           "tableTo": "chats",
-          "columnsFrom": [
-            "chatId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["chatId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -159,7 +151,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'llama2'"
+          "default": "'mistral'"
         },
         "baseUrl": {
           "name": "baseUrl",

@@ -10,5 +10,5 @@ export type Settings = {
   chat_model_base_url: string;
   embedding_model_name: string;
   embedding_model_base_url: string;
-  chroma_url: string;
+  vector_store_url: string;
 };
