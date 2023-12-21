@@ -8,6 +8,7 @@ import {
   ChevronRight,
   ChevronUp,
   Circle,
+  Info,
   Laptop,
   Loader2,
   Menu,
@@ -42,4 +43,5 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
+  info: Info,
 };

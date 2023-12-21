@@ -31,7 +31,7 @@ export default async function ChatPage({ params: { chatId } }: Props) {
       <div className='sticky top-0 z-10 flex h-14 items-center justify-between border-b bg-background px-4 sm:hidden'>
         <Link href='/' className='flex items-center space-x-2'>
           <Icons.logo />
-          <span className='font-semibold'>Chat Docs</span>
+          <span className='font-semibold'>ChatDocs</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>

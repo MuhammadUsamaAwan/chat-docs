@@ -61,7 +61,7 @@ export function Chat({ chat, initialMessages, settings }: Props) {
         <TextareaAutosize
           value={input}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleInputChange(e)}
-          placeholder='Message Chat Docs...'
+          placeholder='Message ChatDocs...'
           className='w-full resize-none rounded-lg border border-input bg-background p-3 ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
           maxRows={7}
           onKeyDown={e => {

@@ -9,8 +9,8 @@ import '~/styles/globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Chat Docs',
-    template: `%s - Chat Docs`,
+    default: 'ChatDocs',
+    template: `%s - ChatDocs`,
   },
   description: 'Upload documents and ask questions with AI',
 };

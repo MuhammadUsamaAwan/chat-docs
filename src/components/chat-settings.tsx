@@ -34,14 +34,14 @@ export function ChatSettings({ chat, settings }: Props) {
             <TabsTrigger value='chat-settings' className='flex-1'>
               Chat Settings
             </TabsTrigger>
-            <TabsTrigger value='global-settings' className='flex-1'>
-              Global Settings
+            <TabsTrigger value='general-settings' className='flex-1'>
+              General Settings
             </TabsTrigger>
           </TabsList>
           <TabsContent value='chat-settings' className='pt-2'>
             <UpdateChatForm onSave={() => setOpen(false)} chat={chat} />
           </TabsContent>
-          <TabsContent value='global-settings'>
+          <TabsContent value='general-settings'>
             <SettingsForm onSave={() => setOpen(false)} initialValues={settings} />
           </TabsContent>
         </Tabs>

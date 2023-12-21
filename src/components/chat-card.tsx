@@ -55,7 +55,7 @@ export function ChatCard({ chat }: Props) {
               className='flex items-center gap-2'
             >
               <Icons.paperClip className='h-4 w-4 shrink-0' />
-              <span>{file.name}</span>
+              <span className='line-clamp-1 text-ellipsis'>{file.name}</span>
             </Link>
           ))}
         </div>
