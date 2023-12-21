@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import type { Chat } from '~/types';
+import type { Chat, Settings } from '~/types';
 import { useChat, type Message } from 'ai/react';
 import TextareaAutosize from 'react-autosize-textarea';
 
@@ -14,14 +14,15 @@ import { Icons } from '~/components/icons';
 type Props = {
   chat: Chat;
   initialMessages?: Message[];
+  settings: Settings;
 };
 
-export function Chat({ chat, initialMessages }: Props) {
+export function Chat({ chat, initialMessages, settings }: Props) {
   const messagesRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    body: { chat },
+    body: { chat, settings },
     initialMessages,
   });
   const isAtBottom = useIsScrolledToBottom(messagesRef);

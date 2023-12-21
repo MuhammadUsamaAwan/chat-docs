@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { getChat, getChatMessages } from '~/lib/fetchers';
+import { getChat, getChatFiles, getChatMessages, getSettings } from '~/lib/fetchers';
 import { Button } from '~/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '~/components/ui/sheet';
 import { Chat } from '~/components/chat';
@@ -15,7 +15,12 @@ type Props = {
 };
 
 export default async function ChatPage({ params: { chatId } }: Props) {
-  const [chat, chatMessages] = await Promise.all([getChat(chatId), getChatMessages(chatId)]);
+  const [chat, chatFiles, chatMessages, settings] = await Promise.all([
+    getChat(chatId),
+    getChatFiles(chatId),
+    getChatMessages(chatId),
+    getSettings(),
+  ]);
 
   if (!chat) {
     notFound();
@@ -35,14 +40,14 @@ export default async function ChatPage({ params: { chatId } }: Props) {
             </Button>
           </SheetTrigger>
           <SheetContent side='left' className='space-y-2'>
-            <ChatSidebar chat={chat} chatFiles={chat.chatFiles} />
+            <ChatSidebar chat={chat} chatFiles={chatFiles} settings={settings} />
           </SheetContent>
         </Sheet>
       </div>
       <aside className='hidden h-screen w-64 space-y-2 border-r p-2 py-4 sm:block'>
-        <ChatSidebar chat={chat} chatFiles={chat.chatFiles} />
+        <ChatSidebar chat={chat} chatFiles={chatFiles} settings={settings} />
       </aside>
-      <Chat chat={chat} initialMessages={chatMessages} />
+      <Chat chat={chat} initialMessages={chatMessages} settings={settings} />
     </div>
   );
 }

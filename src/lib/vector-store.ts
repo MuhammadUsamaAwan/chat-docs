@@ -2,7 +2,8 @@ import { ChromaClient } from 'chromadb';
 import type { Document } from 'langchain/document';
 import { Chroma } from 'langchain/vectorstores/chroma';
 
-import { embeddings } from '~/lib/embeddings';
+import { getEmbeddingsModel } from '~/lib/embeddings';
+import { getSettings } from '~/lib/fetchers';
 
 const client = new ChromaClient();
 
@@ -13,6 +14,11 @@ export async function indexDocument({
   docs: Document<Record<string, unknown>>[];
   collectionName: string;
 }) {
+  const settings = await getSettings();
+  const embeddings = getEmbeddingsModel({
+    model: settings.embedding_model_name,
+    baseUrl: settings.embedding_model_base_url,
+  });
   await Chroma.fromDocuments(docs, embeddings, {
     collectionName,
   });
@@ -25,6 +31,11 @@ export async function deleteCollection({ collectionName }: { collectionName: str
 }
 
 export async function deleteDocument({ filePath, collectionName }: { filePath: string; collectionName: string }) {
+  const settings = await getSettings();
+  const embeddings = getEmbeddingsModel({
+    model: settings.embedding_model_name,
+    baseUrl: settings.embedding_model_base_url,
+  });
   const vectorStore = await Chroma.fromExistingCollection(embeddings, {
     collectionName,
   });
@@ -44,6 +55,11 @@ export async function similaritySearch({
   collectionName: string;
   k?: number;
 }) {
+  const settings = await getSettings();
+  const embeddings = getEmbeddingsModel({
+    model: settings.embedding_model_name,
+    baseUrl: settings.embedding_model_base_url,
+  });
   const vectorStore = await Chroma.fromExistingCollection(embeddings, {
     collectionName,
   });

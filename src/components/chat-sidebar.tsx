@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import type { Chat } from '~/types';
+import type { Chat, Settings } from '~/types';
 
-import { getSettings } from '~/lib/fetchers';
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { AddChatFile } from '~/components/add-chat-file';
 import { ChatFile } from '~/components/chat-file';
@@ -15,11 +14,10 @@ type Props = {
     name: string;
     path: string;
   }[];
+  settings: Settings;
 };
 
-export async function ChatSidebar({ chat, chatFiles }: Props) {
-  const settings = await getSettings();
-
+export function ChatSidebar({ chat, chatFiles, settings }: Props) {
   return (
     <>
       <Link href='/' className='flex items-center space-x-2 rounded-lg p-2 hover:bg-muted'>

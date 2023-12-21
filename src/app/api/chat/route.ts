@@ -1,5 +1,5 @@
 import { db } from '~/db';
-import type { Chat } from '~/types';
+import type { Chat, Settings } from '~/types';
 import { StreamingTextResponse, type Message } from 'ai';
 import { eq } from 'drizzle-orm';
 import { PromptTemplate } from 'langchain/prompts';
@@ -15,11 +15,12 @@ const formatMessage = (message: Message) => {
 
 export async function POST(request: Request) {
   try {
-    const { messages, chat } = (await request.json()) as {
+    const { messages, chat, settings } = (await request.json()) as {
       messages: Message[];
       chat: Chat;
+      settings: Settings;
     };
-    const chatModel = getChatModel({ model: chat.model, baseUrl: chat.baseUrl });
+    const chatModel = getChatModel({ model: settings.chat_model_name, baseUrl: settings.chat_model_base_url });
     const chatHistory = await db.query.chatMessages.findMany({
       where: eq(chatMessages.chatId, chat.id),
       columns: {
@@ -36,6 +37,7 @@ export async function POST(request: Request) {
     }
     const question = messages.at(-1)?.content ?? '';
     const context = await similaritySearch({ text: question, collectionName: chat.id, k: chat.k });
+    console.log(context);
 
     const template = `
       You are a helpful assistant. Your job is to answer the question based only on the following context and chat history. Prioritize the context over the chat history.

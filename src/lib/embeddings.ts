@@ -1,6 +1,8 @@
 import { OllamaEmbeddings } from 'langchain/embeddings/ollama';
 
-export const embeddings = new OllamaEmbeddings({
-  model: 'llama2',
-  baseUrl: 'http://localhost:11434',
-});
+export function getEmbeddingsModel({ model, baseUrl }: { model: string; baseUrl: string }) {
+  return new OllamaEmbeddings({
+    model,
+    baseUrl,
+  });
+}

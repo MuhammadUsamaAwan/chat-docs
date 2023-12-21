@@ -121,5 +121,5 @@ export async function updateSettings(formData: FormData) {
       .onConflictDoUpdate({ target: settings.name, set: { value: chroma_url } }),
   ]);
   revalidatePath('/');
-  revalidatePath('/chat/[chatId]');
+  revalidatePath('/chat/[chatId]', 'page');
 }
