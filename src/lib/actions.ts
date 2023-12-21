@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { db } from '~/db';
 import { and, eq } from 'drizzle-orm';
 
-import { chatFiles, chatMessages, chats } from '~/db/schema';
+import { chatFiles, chatMessages, chats, settings } from '~/db/schema';
 import { loadDocument } from '~/lib/document-loader';
 import { deleteCollection, deleteDocument, indexDocument } from '~/lib/vector-store';
 
@@ -89,4 +89,37 @@ export async function updateChat(formData: FormData) {
   await db.update(chats).set({ name, save, k }).where(eq(chats.id, id));
   revalidatePath('/');
   revalidatePath(`/${id}`);
+}
+
+export async function updateSettings(formData: FormData) {
+  const chat_model_name = formData.get('chat_model_name') as string;
+  const chat_model_base_url = formData.get('chat_model_base_url') as string;
+  const embedding_model_name = formData.get('embedding_model_name') as string;
+  const embedding_model_base_url = formData.get('embedding_model_base_url') as string;
+  const chroma_url = formData.get('chroma_url') as string;
+
+  await Promise.all([
+    db
+      .insert(settings)
+      .values({ name: 'chat_model_name', value: chat_model_name })
+      .onConflictDoUpdate({ target: settings.name, set: { value: chat_model_name } }),
+    db
+      .insert(settings)
+      .values({ name: 'chat_model_base_url', value: chat_model_base_url })
+      .onConflictDoUpdate({ target: settings.name, set: { value: chat_model_base_url } }),
+    db
+      .insert(settings)
+      .values({ name: 'embedding_model_name', value: embedding_model_name })
+      .onConflictDoUpdate({ target: settings.name, set: { value: embedding_model_name } }),
+    db
+      .insert(settings)
+      .values({ name: 'embedding_model_base_url', value: embedding_model_base_url })
+      .onConflictDoUpdate({ target: settings.name, set: { value: embedding_model_base_url } }),
+    db
+      .insert(settings)
+      .values({ name: 'chroma_url', value: chroma_url })
+      .onConflictDoUpdate({ target: settings.name, set: { value: chroma_url } }),
+  ]);
+  revalidatePath('/');
+  revalidatePath('/chat/[chatId]');
 }
