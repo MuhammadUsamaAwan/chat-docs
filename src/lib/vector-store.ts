@@ -5,8 +5,6 @@ import { Chroma } from 'langchain/vectorstores/chroma';
 import { getEmbeddingsModel } from '~/lib/embeddings';
 import { getSettings } from '~/lib/fetchers';
 
-const client = new ChromaClient();
-
 export async function indexDocument({
   docs,
   collectionName,
@@ -21,10 +19,15 @@ export async function indexDocument({
   });
   await Chroma.fromDocuments(docs, embeddings, {
     collectionName,
+    url: settings.chroma_url,
   });
 }
 
 export async function deleteCollection({ collectionName }: { collectionName: string }) {
+  const settings = await getSettings();
+  const client = new ChromaClient({
+    path: settings.chroma_url,
+  });
   await client.deleteCollection({
     name: collectionName,
   });
@@ -38,6 +41,7 @@ export async function deleteDocument({ filePath, collectionName }: { filePath: s
   });
   const vectorStore = await Chroma.fromExistingCollection(embeddings, {
     collectionName,
+    url: settings.chroma_url,
   });
   await vectorStore.delete({
     filter: {
@@ -62,6 +66,7 @@ export async function similaritySearch({
   });
   const vectorStore = await Chroma.fromExistingCollection(embeddings, {
     collectionName,
+    url: settings.chroma_url,
   });
   const docs = await vectorStore.similaritySearch(text, k ?? 1);
   return docs.map(doc => doc.pageContent).join('\n');
