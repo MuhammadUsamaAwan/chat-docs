@@ -4,9 +4,6 @@ import { JSONLoader } from 'langchain/document_loaders/fs/json';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { PPTXLoader } from 'langchain/document_loaders/fs/pptx';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
-import { UnstructuredLoader } from 'langchain/document_loaders/fs/unstructured';
-import { HtmlToTextTransformer } from 'langchain/document_transformers/html_to_text';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { readFile, utils } from 'xlsx';
 
 async function pdfLoader(path: string) {
@@ -39,20 +36,6 @@ async function textLoader(path: string) {
   return loader.load();
 }
 
-async function unstructuredLoader(path: string) {
-  const loader = new UnstructuredLoader(path);
-  return loader.load();
-}
-
-async function htmlLoader(path: string) {
-  const loader = new UnstructuredLoader(path);
-  const docs = await loader.load();
-  const splitter = RecursiveCharacterTextSplitter.fromLanguage('html');
-  const transformer = new HtmlToTextTransformer();
-  const sequence = splitter.pipe(transformer);
-  return sequence.invoke(docs);
-}
-
 async function xlsxLoader(path: string) {
   const workbook = readFile(path);
   const sheetName = workbook.SheetNames[0];
@@ -82,11 +65,9 @@ export async function loadDocument(path: string) {
       return pptxLoader(path);
     case 'txt':
       return textLoader(path);
-    case 'html':
-      return htmlLoader(path);
     case 'xlsx':
       return xlsxLoader(path);
     default:
-      return unstructuredLoader(path);
+      throw new Error('Unsupported file type');
   }
 }
