@@ -49,20 +49,6 @@ export function ChatSettings({ chat }: Props) {
             <Input name='name' id='chat-name' defaultValue={chat.name} />
           </div>
           <div className='space-y-1'>
-            <Label htmlFor='model'>Model Name</Label>
-            <Input id='model' name='model' defaultValue={chat.model} placeholder='Model Name' required />
-          </div>
-          <div className='space-y-1'>
-            <Label htmlFor='model-base-url'>Model Base Url</Label>
-            <Input
-              id='model-base-url'
-              name='baseUrl'
-              defaultValue={chat.baseUrl}
-              placeholder='Model Base Url'
-              required
-            />
-          </div>
-          <div className='space-y-1'>
             <Label>Save Messages</Label>
             <Select name='save' defaultValue={chat.save ? 'yes' : 'no'}>
               <SelectTrigger>
@@ -75,19 +61,8 @@ export function ChatSettings({ chat }: Props) {
             </Select>
           </div>
           <div className='space-y-1'>
-            <Label>No of Pages for Context</Label>
-            <Select name='k' defaultValue={String(chat.k)}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='1'>One</SelectItem>
-                <SelectItem value='2'>Two</SelectItem>
-                <SelectItem value='3'>Three</SelectItem>
-                <SelectItem value='4'>Four</SelectItem>
-                <SelectItem value='5'>Five</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label htmlFor='k'>No of Pages for Context</Label>
+            <Input id='k' name='k' type='number' inputMode='numeric' defaultValue={1} min={0} />
           </div>
           <LoadingButton type='submit' className='w-full' isLoading={isPending}>
             Save Changes

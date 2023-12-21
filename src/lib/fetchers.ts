@@ -1,7 +1,7 @@
 import { db } from '~/db';
-import { eq } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 
-import { chatMessages, chats } from '~/db/schema';
+import { chatMessages, chats, settings } from '~/db/schema';
 
 export async function getChats() {
   return db.query.chats.findMany({
@@ -28,8 +28,6 @@ export async function getChat(id: string) {
     columns: {
       id: true,
       name: true,
-      model: true,
-      baseUrl: true,
       save: true,
       k: true,
     },
@@ -63,4 +61,28 @@ export async function getChatMessages(chatId: string) {
       createdAt: true,
     },
   });
+}
+
+export async function getSettings() {
+  const keys = [
+    'chat_model_name',
+    'chat_model_base_url',
+    'embedding_model_name',
+    'embedding_model_base_url',
+    'chroma_url',
+  ];
+  const s = await db.query.settings.findMany({
+    where: inArray(settings.name, keys),
+    columns: {
+      name: true,
+      value: true,
+    },
+  });
+  return {
+    chat_model_name: s.find(e => e.name === 'chat_model_name')?.value ?? 'llama2',
+    chat_model_base_url: s.find(e => e.name === 'chat_model_base_url')?.value ?? 'http://localhost:11434',
+    embedding_model_name: s.find(e => e.name === 'embedding_model_name')?.value ?? 'llama2',
+    embedding_model_base_url: s.find(e => e.name === 'embedding_model_base_url')?.value ?? 'http://localhost:11434',
+    chroma_url: s.find(e => e.name === 'chroma_url')?.value ?? 'http://localhost:8000',
+  };
 }

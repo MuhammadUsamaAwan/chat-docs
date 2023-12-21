@@ -11,12 +11,10 @@ import { deleteCollection, deleteDocument, indexDocument } from '~/lib/vector-st
 
 export async function createChat(formData: FormData) {
   const name = formData.get('name') as string;
-  const model = formData.get('model') as string;
-  const baseUrl = formData.get('baseUrl') as string;
   const files = formData.getAll('files') as File[];
   const save = (formData.get('save') as string) === 'yes';
   const k = parseInt(formData.get('k') as string);
-  const [chat] = await db.insert(chats).values({ name, model, baseUrl, save, k }).returning({ id: chats.id });
+  const [chat] = await db.insert(chats).values({ name, save, k }).returning({ id: chats.id });
   if (!chat) {
     throw new Error('Unable to create chat, please try again later');
   }
@@ -85,12 +83,10 @@ export async function addChatMessage({ chatId, content }: { chatId: string; cont
 
 export async function updateChat(formData: FormData) {
   const id = formData.get('id') as string;
-  const model = formData.get('model') as string;
-  const baseUrl = formData.get('baseUrl') as string;
   const name = formData.get('name') as string;
   const save = (formData.get('save') as string) === 'yes';
   const k = parseInt(formData.get('k') as string);
-  await db.update(chats).set({ name, model, baseUrl, save, k }).where(eq(chats.id, id));
+  await db.update(chats).set({ name, save, k }).where(eq(chats.id, id));
   revalidatePath('/');
   revalidatePath(`/${id}`);
 }

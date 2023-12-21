@@ -22,6 +22,20 @@
       "when": 1703086039831,
       "tag": "0002_oval_energizer",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1703136855176,
+      "tag": "0003_easy_kronos",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1703137024691,
+      "tag": "0004_adorable_legion",
+      "breakpoints": true
     }
   ]
 }
