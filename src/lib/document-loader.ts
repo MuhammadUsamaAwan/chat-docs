@@ -4,7 +4,7 @@ import { JSONLoader } from 'langchain/document_loaders/fs/json';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { PPTXLoader } from 'langchain/document_loaders/fs/pptx';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
-import { readFile, utils } from 'xlsx';
+import { UnstructuredLoader } from 'langchain/document_loaders/fs/unstructured';
 
 async function pdfLoader(path: string) {
   const loader = new PDFLoader(path);
@@ -36,16 +36,10 @@ async function textLoader(path: string) {
   return loader.load();
 }
 
-async function xlsxLoader(path: string) {
-  const workbook = readFile(path);
-  const sheetName = workbook.SheetNames[0];
-  if (!sheetName) throw new Error('Unable to read file, No sheet found');
-  const worksheet = workbook.Sheets[sheetName];
-  if (!worksheet) throw new Error('Unable to read file, No worksheet found');
-  const csv = utils.sheet_to_csv(worksheet);
-  const csvBuffer = Buffer.from(csv, 'utf-8');
-  const csvBlob = new Blob([csvBuffer]);
-  const loader = new CSVLoader(csvBlob);
+async function unstructuredLoader(path: string) {
+  const loader = new UnstructuredLoader(path, {
+    apiUrl: 'http://127.0.0.1:8001/general/v0/general',
+  });
   return loader.load();
 }
 
@@ -65,9 +59,7 @@ export async function loadDocument(path: string) {
       return pptxLoader(path);
     case 'txt':
       return textLoader(path);
-    case 'xlsx':
-      return xlsxLoader(path);
     default:
-      throw new Error('Unsupported file type');
+      return unstructuredLoader(path);
   }
 }

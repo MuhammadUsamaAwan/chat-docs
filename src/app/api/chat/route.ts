@@ -37,7 +37,9 @@ export async function POST(request: Request) {
     }
     const question = messages.at(-1)?.content ?? '';
     const context = await similaritySearch({ text: question, collectionName: chat.id, k: chat.k });
+    console.log('---CONTEXT---');
     console.log(context);
+    console.log('---CONTEXT---');
 
     const template = `
         ---

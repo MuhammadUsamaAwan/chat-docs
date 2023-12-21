@@ -39,7 +39,6 @@
     "dayjs": "^1.11.10",
     "drizzle-orm": "^0.29.1",
     "highlight.js": "^11.9.0",
-    "html-to-text": "^9.0.5",
     "langchain": "^0.0.209",
     "lucide-react": "^0.298.0",
     "mammoth": "^1.6.0",
@@ -55,8 +54,7 @@
     "rehype-highlight": "^7.0.0",
     "sonner": "^1.2.4",
     "tailwind-merge": "^2.1.0",
-    "tailwindcss-animate": "^1.0.7",
-    "xlsx": "^0.18.5"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
