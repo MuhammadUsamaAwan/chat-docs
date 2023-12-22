@@ -48,7 +48,7 @@ export function UpdateChatForm({ onSave, chat }: Props) {
       </div>
       <div className='space-y-1'>
         <Label htmlFor='k'>No of Pages for Context</Label>
-        <Input id='k' name='k' type='number' inputMode='numeric' defaultValue={1} min={0} />
+        <Input id='k' name='k' type='number' inputMode='numeric' defaultValue={chat.k} min={1} />
       </div>
       <LoadingButton type='submit' className='w-full' isLoading={isPending}>
         Save Changes
