@@ -20,24 +20,24 @@ cd chat-docs
 
 1. Install project dependencies using pnpm:
 
-```bash
-pnpm i
-```
+   ```bash
+   pnpm i
+   ```
 
 1. Push the database:
 
-```bash
-pnpm db:push
-```
+   ```bash
+   pnpm db:push
+   ```
 
 1. Bring up the service:
 
-```bash
-pnpm chroma:up && docker compose up -d
-```
+   ```bash
+   pnpm chroma:up && docker compose up -d
+   ```
 
 1. Start the development server:
 
-```bash
-pnpm dev
-```
+   ```bash
+   pnpm dev
+   ```
