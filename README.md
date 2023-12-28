@@ -13,10 +13,10 @@ Make sure you have the following tools installed on your system before proceedin
 
 1. Clone the repository to your local machine:
 
-```bash
-git clone https://github.com/muhammadusamaawan/chat-docs.git
-cd chat-docs
-```
+   ```bash
+   git clone https://github.com/muhammadusamaawan/chat-docs.git
+   cd chat-docs
+   ```
 
 1. Install project dependencies using pnpm:
 
