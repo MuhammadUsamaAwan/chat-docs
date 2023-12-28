@@ -18,13 +18,13 @@ git clone https://github.com/muhammadusamaawan/chat-docs.git
 cd chat-docs
 ```
 
-2. Install project dependencies using pnpm:
+1. Install project dependencies using pnpm:
 
 ```bash
 pnpm i
 ```
 
-3. Push the database:
+1. Push the database:
 
 ```bash
 pnpm db:push
