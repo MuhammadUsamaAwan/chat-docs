@@ -51,7 +51,7 @@ export function CreateChat() {
           </div>
           <div className='space-y-1'>
             <Label htmlFor='chat-files'>Files</Label>
-            <Input id='chat-files' name='files' type='file' multiple />
+            <Input id='chat-files' name='files' type='file' multiple required />
           </div>
           <div className='space-y-1'>
             <Label>Save Messages</Label>

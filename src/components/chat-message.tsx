@@ -27,17 +27,21 @@ export function ChatMessage({ message }: Props) {
           {message.role === 'user' ? 'You' : 'ChatDocs AI'}{' '}
           <span className='text-sm font-normal text-muted-foreground'>({relativeTime} ago)</span>
         </div>
-        <MemoizedReactMarkdown
-          className='prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0'
-          rehypePlugins={[rehypeHighlight]}
-          components={{
-            p({ children }) {
-              return <p className='mb-2 last:mb-0'>{children}</p>;
-            },
-          }}
-        >
-          {message.content}
-        </MemoizedReactMarkdown>
+        {message.role === 'user' ? (
+          <div>{message.content}</div>
+        ) : (
+          <MemoizedReactMarkdown
+            className='prose max-w-full break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0'
+            rehypePlugins={[rehypeHighlight]}
+            components={{
+              p({ children }) {
+                return <p className='mb-2 last:mb-0'>{children}</p>;
+              },
+            }}
+          >
+            {message.content}
+          </MemoizedReactMarkdown>
+        )}
       </div>
     </div>
   );
